@@ -5,7 +5,6 @@
 	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="css/slider.css" rel="stylesheet" type="text/css" media="all"/>
 	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
 	
 	<script type="text/javascript">
@@ -32,16 +31,14 @@
 			var ingridientResultLength	=	Object.keys(ingridientInfo.results).length; // length of ingridientInfo results array
 				for(var i=0;i<ingridientResultLength;i++){
 					if(ingridientInfo.results[i].title==recipeValue){  // if recipient ingredient is equal to ingridientInfo ingredient, then display the result
-						$("#result_recipe_container").css('display','block');
+						$("#result_recipe_container").css('display','none').fadeIn('slow');
 						$("#result_recipe_container").html("<div class='result_left_section'><img src='"+ingridientInfo.results[i].thumbnail+"'></div><div class='result_right_section'><h3>"+ingridientInfo.results[i].ingredients+"</h3><p>"+ingridientInfo.results[i].desc+"</p></div>");
 						break;
-					}				
-				}
-				
-				/* if recipient matches none of ingridientInfo ingredient , then display 'No result found' */
-				if($("#result_recipe_container").html()==""){
-					$("#result_recipe_container").css('display','block');
-					$("#result_recipe_container").html("Sorry No results found");
+					}else{
+					/* if recipient matches none of ingridientInfo ingredient , then display 'No result found' */
+						$("#result_recipe_container").css('display','none').fadeIn('slow');
+						$("#result_recipe_container").html("<div class='result_right_section'><h3>Sorry!!! No results found</h3></div>");
+					}					
 				}
 		}
 	</script>
@@ -63,13 +60,13 @@
 					<h2>Recipe Search</h2>
 					<hr>
 					<div class="outer_recipe_container">
-						<form action="" method="get">
 							<div class="recipe_container">
 								<div class="left_section"><label>Enter Ingredient:</label></div>
-								<div class="right_section"><input name="ingredient_value" id="ingredient_value" type="text" class="textbox" required="required"></div>
+								<div class="right_section"><input name="ingredient_value" id="ingredient_value" type="text" class="textbox" required="required">
 								<input type="button" onclick="getRecipies()" value="Search" class="button" />
+								</div>
+								
 							</div>
-						</form>
 					</div>
 				</div>
 				<div class="result_recipe_container" id="result_recipe_container" style="display:none;"></div>
